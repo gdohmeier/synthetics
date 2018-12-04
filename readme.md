@@ -1,5 +1,5 @@
 
-#TL DR
+# TL;DR
 My end goal is to script this whole setup for deployment/setup via ansible, docker, vagrant in order that the whole mess can just be generated for you,  but that is a work in progress. For now you need to.
     - Prerequisties: java, maven, git
     - Develop
