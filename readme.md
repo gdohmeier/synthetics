@@ -1,10 +1,11 @@
 
 # TL;DR
-My end goal is to script this whole setup for deployment/setup via ansible, docker, vagrant in order that the whole mess can just be generated for you,  but that is a work in progress. For now you need to.
-    - Prerequisties: java, maven, git
-    - Develop
-    - Test
-    - Deploy
+My end goal is to script this whole setup for deployment/setup via ansible, docker, vagrant in order that the whole mess can just be generated for you,  but that is a work in progress. For now you need to do it manually. 
+- First piece of work (migration of check_selenium to maven/travis) is done.
+- Next steps:
+  + add utility classes (synthetics_util) and tests
+  + add example app monitoring checks (synthetic_tests) and tests
+  + add build , test and deploy automation. 
 
 # Intro
 Create a selenium synthetic monitoring framework using open source tools.  We will be using a number of open source tools for the dev and test environments and provide guidance for building and deploying to a prod environment. I will list all the tools that are used and the versions that are used for this project.
@@ -135,7 +136,7 @@ In this section we will create the basic structure and naming conventions for ou
                 + made enhancements to the code.
             + I setup TravisCi to perform a testing of this project on pull requests. Getting the TravisCi working was a bit tricky.  Look at the .travis.yml filen in the root of the project and then see the travis docs for more info.  The ci site for this is here: https://travis-ci.org/gdohmeier/check_selenium/
             + I used this easy to follow youtube tutorial on how to put the project into the central maven repo for sharing with others. https://youtu.be/bxP9IuJbcDQ
-                + For this to work I had to make a couple of changes, additions to the youtube instructions... otherwise gpg signing failed.
+                + For this to work I had to make a couple of changes, additions to the youtube instructions... otherwise gpg signing fails.
                     + updated the maven gpg plugin ( maven-gpg-plugin ) to add... 
                         ```yml
                         <configuration>
@@ -145,11 +146,10 @@ In this section we will create the basic structure and naming conventions for ou
                             </gpgArguments>
                         </configuration>
                         ```
-                    + As in the youtube the last two steps then were: 
-                        + mvn 
-                        + 
-
-
+                   + As in the youtube the last few steps then were: 
+                        + mvn clean deploy
+                        + mvn versions:set -DnewVersion=1.0
+                        + mvn deploy -P release
 
 # Created TravisCi build setups for all synthetics repos
     + Setup your travis.io to link to your github
